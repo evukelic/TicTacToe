@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Move } from '../position/position.model';
 import { NUMBER_OF_POSITIONS } from './board.consts';
 
 @Component({
@@ -9,7 +10,18 @@ import { NUMBER_OF_POSITIONS } from './board.consts';
 export class BoardComponent implements OnInit {
   public moves: string[] = [...Array(NUMBER_OF_POSITIONS)].map((_) => '');
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
+
+  public getMove(move: string, position: number): Move {
+    return {
+      move,
+      position,
+    };
+  }
+
+  public onPlayerMove(index: number): void {
+    this.moves[index] = 'X';
+  }
 }
