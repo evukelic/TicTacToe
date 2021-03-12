@@ -1,1 +1,11 @@
-<p class="board">board works!</p>
+<div class="container">
+  <mat-card class="board">
+    <mat-grid-list cols="3" rowHeight="1:1">
+      <div *ngFor="let move of moves; index as i">
+        <mat-grid-tile>
+          <app-position></app-position>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+  </mat-card>
+</div>

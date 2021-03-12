@@ -8,3 +8,10 @@ body {
 .w-100p {
   width: 100%;
 }
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
