@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Move } from '../position/position.model';
-import { NUMBER_OF_POSITIONS } from './board.consts';
+import { ComputerMoveService } from 'src/app/service/computer-move.service';
+import { BOARD_DIMENSION } from './board.consts';
 
 @Component({
   selector: 'app-board',
@@ -8,20 +8,26 @@ import { NUMBER_OF_POSITIONS } from './board.consts';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  public moves: string[] = [...Array(NUMBER_OF_POSITIONS)].map((_) => '');
+  public board: string[][] = [];
 
-  public constructor() {}
+  public constructor(public computerMoveService: ComputerMoveService) {}
 
-  public ngOnInit(): void {}
-
-  public getMove(move: string, position: number): Move {
-    return {
-      move,
-      position,
-    };
+  public ngOnInit(): void {
+    this.initEmptyBoard();
   }
 
-  public onPlayerMove(index: number): void {
-    this.moves[index] = 'X';
+  public onPlayerMove(row: number, column: number): void {
+    this.board[row][column] = 'X';
+
+    this.setComputerMove();
+  }
+
+  private initEmptyBoard(): void {
+    this.board = [...Array(BOARD_DIMENSION)].map((_) => [...Array(BOARD_DIMENSION)].map((_) => ''));
+  }
+
+  private setComputerMove(): void {
+    const [row, column] = this.computerMoveService.getComputerMove(this.board);
+    this.board[row][column] = 'O';
   }
 }

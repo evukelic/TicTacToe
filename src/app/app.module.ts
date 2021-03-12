@@ -10,10 +10,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BoardComponent } from './components/board/board.component';
-import { PositionComponent } from './components/position/position.component';
+import { MoveComponent } from './components/move/move.component';
 
 @NgModule({
-  declarations: [AppComponent, StartComponent, BoardComponent, PositionComponent],
+  declarations: [AppComponent, StartComponent, BoardComponent, MoveComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
