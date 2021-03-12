@@ -1,0 +1,12 @@
+.card {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.start-button {
+  text-align: center;
+}
+
+.amber {
+  background-color: #ffbf00;
+}

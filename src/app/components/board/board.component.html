@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-card class="board">
+    <mat-grid-list cols="3" rowHeight="1:1">
+      <div *ngFor="let move of moves; index as i">
+        <mat-grid-tile (click)="onPlayerMove(i)">
+          <app-position [move]="getMove(move, i)"></app-position>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+  </mat-card>
+</div>
