@@ -25,6 +25,11 @@ export class BoardComponent implements OnInit {
 
     this.board[row][column] = 'X';
 
+    const isWin = this.isWin();
+    if (isWin) {
+      //todo dialog w message newgame/exit
+    }
+
     this.setComputerMove();
   }
 
@@ -34,7 +39,18 @@ export class BoardComponent implements OnInit {
 
   private setComputerMove(): void {
     const [row, column] = this.computerMoveService.getComputerMove(this.board);
+
+    const isDraw = this.isDraw(row, column);
+    if (isDraw) {
+      //todo dialog w message newgame/exit
+    }
+
     this.board[row][column] = 'O';
+
+    const isWin = this.isWin();
+    if (isWin) {
+      //todo dialog w message newgame/exit
+    }
   }
 
   private isValidMove(row: number, column: number): boolean {
@@ -47,5 +63,15 @@ export class BoardComponent implements OnInit {
     }
 
     return true;
+  }
+
+  private isDraw(row: number, column: number): boolean {
+    const isDraw = row === -1 || column === -1;
+    return isDraw;
+  }
+
+  private isWin(): boolean {
+    //todo check board for the win
+    return false;
   }
 }
