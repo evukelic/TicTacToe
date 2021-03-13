@@ -14,10 +14,10 @@ export class ComputerMoveService {
     for (const [rowIndex, row] of board.entries()) {
       for (let [colIndex, move] of row.entries()) {
         if (move === '') {
-          move = 'X';
+          board[rowIndex][colIndex] = 'X';
           const moveEvaluation = this.minimax(board, 0, false);
 
-          move = '';
+          board[rowIndex][colIndex] = '';
           if (moveEvaluation > bestVal) {
             bestMove = [rowIndex, colIndex];
             bestVal = moveEvaluation;
@@ -30,6 +30,7 @@ export class ComputerMoveService {
   }
 
   private minimax(board: string[][], depth: number, isMax: boolean): number {
+    debugger;
     const score = this.evaluate(board);
 
     switch (score) {
@@ -49,29 +50,29 @@ export class ComputerMoveService {
       for (const [rowIndex, row] of board.entries()) {
         for (let [colIndex, move] of row.entries()) {
           if (move === '') {
-            move = 'X';
+            board[rowIndex][colIndex] = 'X';
             const minimaxVal = this.minimax(board, depth + 1, !isMax);
             best = Math.max(best, minimaxVal);
-            move = '';
+            board[rowIndex][colIndex] = '';
           }
         }
       }
 
-      return best;
+      return best - depth;
     } else {
       let best = 1000;
       for (const [rowIndex, row] of board.entries()) {
         for (let [colIndex, move] of row.entries()) {
           if (move === '') {
-            move = 'O';
-            const minimaxVal = this.minimax(board, depth + 1, !isMax);
+            board[rowIndex][colIndex] = 'O';
+            const minimaxVal = this.minimax(board, depth + 1, isMax);
             best = Math.min(best, minimaxVal);
-            move = '';
+            board[rowIndex][colIndex] = '';
           }
         }
       }
 
-      return best;
+      return best + depth;
     }
   }
 
