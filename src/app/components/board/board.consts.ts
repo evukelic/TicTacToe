@@ -1,1 +1,1 @@
-export const NUMBER_OF_POSITIONS: number = 9;
+export const BOARD_DIMENSION: number = 3;

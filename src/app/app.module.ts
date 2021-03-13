@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BoardComponent } from './components/board/board.component';
-import { PositionComponent } from './components/position/position.component';
+import { MoveComponent } from './components/move/move.component';
 
 @NgModule({
-  declarations: [AppComponent, StartComponent, BoardComponent, PositionComponent],
+  declarations: [AppComponent, StartComponent, BoardComponent, MoveComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,6 +23,7 @@ import { PositionComponent } from './components/position/position.component';
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
