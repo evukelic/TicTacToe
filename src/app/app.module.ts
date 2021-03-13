@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BoardComponent } from './components/board/board.component';
 import { MoveComponent } from './components/move/move.component';
 
@@ -22,6 +23,7 @@ import { MoveComponent } from './components/move/move.component';
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
