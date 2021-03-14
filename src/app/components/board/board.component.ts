@@ -42,9 +42,11 @@ export class BoardComponent implements OnInit {
 
     this.board[row][column] = 'X';
 
-    const isWin = this.isWin();
+    const isWin = this.isWin('X', row, column);
     if (isWin) {
-      //todo dialog w message newgame/exit
+      const dialogData = this.getWinDialogData();
+      this.openInfoDialog(dialogData);
+      return;
     }
 
     this.setComputerMove();
@@ -66,9 +68,11 @@ export class BoardComponent implements OnInit {
 
     this.board[row][column] = 'O';
 
-    const isWin = this.isWin();
+    const isWin = this.isWin('O', row, column);
     if (isWin) {
-      //todo dialog w message newgame/exit
+      const dialogData = this.getLoseDialogData();
+      this.openInfoDialog(dialogData);
+      return;
     }
   }
 
@@ -89,9 +93,13 @@ export class BoardComponent implements OnInit {
     return isDraw;
   }
 
-  private isWin(): boolean {
-    //todo check board for the win
-    return false;
+  private isWin(player: string, row: number, column: number): boolean {
+    const isRow = this.checkRow(player, row);
+    const isColumn = this.checkColumn(player, column);
+    const isLeftDiagonal = this.checkLeftDiagonal(player);
+    const isRightDiagonal = this.checkRightDiagonal(player);
+
+    return isRow || isColumn || isLeftDiagonal || isRightDiagonal;
   }
 
   private openInfoDialog(data: DialogData): void {
@@ -103,6 +111,38 @@ export class BoardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((_) => {
       this.initEmptyBoard();
     });
+  }
+
+  private checkRow(player: string, row: number): boolean {
+    const isWin =
+      this.board[row][0] === player &&
+      this.board[row][1] === player &&
+      this.board[row][2] === player;
+
+    return isWin;
+  }
+
+  private checkColumn(player: string, column: number): boolean {
+    const isWin =
+      this.board[0][column] === player &&
+      this.board[1][column] === player &&
+      this.board[2][column] === player;
+
+    return isWin;
+  }
+
+  private checkLeftDiagonal(player: string): boolean {
+    const isWin =
+      this.board[0][0] === player && this.board[1][1] === player && this.board[2][2] === player;
+
+    return isWin;
+  }
+
+  private checkRightDiagonal(player: string): boolean {
+    const isWin =
+      this.board[2][0] === player && this.board[1][1] === player && this.board[0][2] === player;
+
+    return isWin;
   }
 
   private getDrawDialogData(): DialogData {

@@ -19,7 +19,7 @@ export class InfoDialogComponent implements OnInit {
 
   public onExitClick(): void {
     this.dialogRef.close();
-    this.router.navigate(['/start']);
+    this.router.navigateByUrl('/start');
   }
 
   public onNewGameClick(): void {

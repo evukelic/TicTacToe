@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MoveComponent implements OnInit {
   @Input() public move: string;
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 }
