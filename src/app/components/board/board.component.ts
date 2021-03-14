@@ -99,6 +99,10 @@ export class BoardComponent implements OnInit {
       width: '250px',
       data,
     });
+
+    dialogRef.afterClosed().subscribe((_) => {
+      this.initEmptyBoard();
+    });
   }
 
   private getDrawDialogData(): DialogData {
