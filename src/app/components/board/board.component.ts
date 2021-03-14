@@ -4,7 +4,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComputerMoveService } from 'src/app/service/computer-move.service';
 import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
 import { DialogData } from 'src/app/shared/info-dialog/info-dialog.model';
-import { BOARD_DIMENSION } from './board.consts';
+import {
+  BOARD_DIMENSION,
+  DRAW_CONTENT,
+  DRAW_TITLE,
+  INVALID_MOVE,
+  LOSE_CONTENT,
+  LOSE_TITLE,
+  OK,
+  WIN_CONTENT,
+  WIN_TITLE,
+} from './board.consts';
 
 @Component({
   selector: 'app-board',
@@ -64,7 +74,7 @@ export class BoardComponent implements OnInit {
 
   private isValidMove(row: number, column: number): boolean {
     if (this.board[row][column] !== '') {
-      this.snackBar.open('Invalid move!', 'OK', {
+      this.snackBar.open(INVALID_MOVE, OK, {
         duration: 2000,
       });
 
@@ -92,14 +102,14 @@ export class BoardComponent implements OnInit {
   }
 
   private getDrawDialogData(): DialogData {
-    return { title: 'DRAW', content: "It's a draw! Wanna try again?" };
+    return { title: DRAW_TITLE, content: DRAW_CONTENT };
   }
 
   private getWinDialogData(): DialogData {
-    return { title: "YOU'VE WON!", content: 'Give yourself a tap on the shoulder. Wanna try again?' };
+    return { title: WIN_TITLE, content: WIN_CONTENT };
   }
 
   private getLoseDialogData(): DialogData {
-    return { title: "YOU'VE LOST!", content: 'Haha, you suck. Wanna try again?' };
+    return { title: LOSE_TITLE, content: LOSE_CONTENT };
   }
 }
