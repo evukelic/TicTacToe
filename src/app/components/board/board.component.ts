@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComputerMoveService } from 'src/app/service/computer-move.service';
+import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
+import { DialogData } from 'src/app/shared/info-dialog/info-dialog.model';
 import { BOARD_DIMENSION } from './board.consts';
 
 @Component({
@@ -11,7 +14,11 @@ import { BOARD_DIMENSION } from './board.consts';
 export class BoardComponent implements OnInit {
   public board: string[][] = [];
 
-  public constructor(public computerMoveService: ComputerMoveService, private snackBar: MatSnackBar) {}
+  public constructor(
+    public computerMoveService: ComputerMoveService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
+  ) {}
 
   public ngOnInit(): void {
     this.initEmptyBoard();
@@ -42,7 +49,9 @@ export class BoardComponent implements OnInit {
 
     const isDraw = this.isDraw(row, column);
     if (isDraw) {
-      //todo dialog w message newgame/exit
+      const dialogData = this.getDrawDialogData();
+      this.openInfoDialog(dialogData);
+      return;
     }
 
     this.board[row][column] = 'O';
@@ -73,5 +82,24 @@ export class BoardComponent implements OnInit {
   private isWin(): boolean {
     //todo check board for the win
     return false;
+  }
+
+  private openInfoDialog(data: DialogData): void {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '250px',
+      data,
+    });
+  }
+
+  private getDrawDialogData(): DialogData {
+    return { title: 'DRAW', content: "It's a draw! Wanna try again?" };
+  }
+
+  private getWinDialogData(): DialogData {
+    return { title: "YOU'VE WON!", content: 'Give yourself a tap on the shoulder. Wanna try again?' };
+  }
+
+  private getLoseDialogData(): DialogData {
+    return { title: "YOU'VE LOST!", content: 'Haha, you suck. Wanna try again?' };
   }
 }
