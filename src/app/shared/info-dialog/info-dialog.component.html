@@ -1,8 +1,12 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
-<div mat-dialog-content>
-  <p>{{ data.content }}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button (click)="onNewGameClick()" cdkFocusInitial>New game</button>
-  <button mat-raised-button (click)="onExitClick()">Exit</button>
+<div class="info-dialog">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+  <div mat-dialog-content>
+    <p>{{ data.content }}</p>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button (click)="onExitClick()">Exit</button>
+    <button mat-raised-button (click)="onNewGameClick()" class="amber" cdkFocusInitial>
+      New game
+    </button>
+  </div>
 </div>

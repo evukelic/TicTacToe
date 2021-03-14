@@ -7,6 +7,7 @@
   text-align: center;
 }
 
-.amber {
-  background-color: #ffbf00;
+.tic-tac-toe {
+  max-width: 250px;
+  max-height: 250px;
 }

@@ -3,7 +3,7 @@
     <mat-grid-list cols="3" rowHeight="1:1">
       <div *ngFor="let row of board; index as i">
         <div *ngFor="let row of board; index as j">
-          <mat-grid-tile (click)="onPlayerMove(i, j)">
+          <mat-grid-tile (click)="onPlayerMove(i, j)" class="move">
             <app-move [move]="board[i][j]"></app-move>
           </mat-grid-tile>
         </div>

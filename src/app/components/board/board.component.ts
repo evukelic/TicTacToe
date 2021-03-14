@@ -104,8 +104,11 @@ export class BoardComponent implements OnInit {
 
   private openInfoDialog(data: DialogData): void {
     const dialogRef = this.dialog.open(InfoDialogComponent, {
-      width: '250px',
+      width: '300px',
       data,
+      position: {
+        top: '0px',
+      },
     });
 
     dialogRef.afterClosed().subscribe((_) => {

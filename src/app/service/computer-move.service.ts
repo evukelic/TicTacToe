@@ -29,7 +29,6 @@ export class ComputerMoveService {
   }
 
   private minimax(board: string[][], depth: number, isMax: boolean): number {
-    debugger;
     const score = this.evaluate(board);
 
     switch (score) {
