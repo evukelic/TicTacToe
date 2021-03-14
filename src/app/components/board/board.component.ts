@@ -1,7 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComputerMoveService } from 'src/app/service/computer-move.service';
-import { BOARD_DIMENSION } from './board.consts';
+import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
+import { DialogData } from 'src/app/shared/info-dialog/info-dialog.model';
+import {
+  BOARD_DIMENSION,
+  DRAW_CONTENT,
+  DRAW_TITLE,
+  INVALID_MOVE,
+  LOSE_CONTENT,
+  LOSE_TITLE,
+  OK,
+  WIN_CONTENT,
+  WIN_TITLE,
+} from './board.consts';
 
 @Component({
   selector: 'app-board',
@@ -11,7 +24,11 @@ import { BOARD_DIMENSION } from './board.consts';
 export class BoardComponent implements OnInit {
   public board: string[][] = [];
 
-  public constructor(public computerMoveService: ComputerMoveService, private snackBar: MatSnackBar) {}
+  public constructor(
+    public computerMoveService: ComputerMoveService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
+  ) {}
 
   public ngOnInit(): void {
     this.initEmptyBoard();
@@ -42,7 +59,9 @@ export class BoardComponent implements OnInit {
 
     const isDraw = this.isDraw(row, column);
     if (isDraw) {
-      //todo dialog w message newgame/exit
+      const dialogData = this.getDrawDialogData();
+      this.openInfoDialog(dialogData);
+      return;
     }
 
     this.board[row][column] = 'O';
@@ -55,7 +74,7 @@ export class BoardComponent implements OnInit {
 
   private isValidMove(row: number, column: number): boolean {
     if (this.board[row][column] !== '') {
-      this.snackBar.open('Invalid move!', 'OK', {
+      this.snackBar.open(INVALID_MOVE, OK, {
         duration: 2000,
       });
 
@@ -73,5 +92,28 @@ export class BoardComponent implements OnInit {
   private isWin(): boolean {
     //todo check board for the win
     return false;
+  }
+
+  private openInfoDialog(data: DialogData): void {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '250px',
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe((_) => {
+      this.initEmptyBoard();
+    });
+  }
+
+  private getDrawDialogData(): DialogData {
+    return { title: DRAW_TITLE, content: DRAW_CONTENT };
+  }
+
+  private getWinDialogData(): DialogData {
+    return { title: WIN_TITLE, content: WIN_CONTENT };
+  }
+
+  private getLoseDialogData(): DialogData {
+    return { title: LOSE_TITLE, content: LOSE_CONTENT };
   }
 }

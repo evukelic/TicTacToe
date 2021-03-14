@@ -12,9 +12,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BoardComponent } from './components/board/board.component';
 import { MoveComponent } from './components/move/move.component';
+import { InfoDialogComponent } from './shared/info-dialog/info-dialog.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, StartComponent, BoardComponent, MoveComponent],
+  declarations: [AppComponent, StartComponent, BoardComponent, MoveComponent, InfoDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,8 +26,14 @@ import { MoveComponent } from './components/move/move.component';
     MatButtonModule,
     MatGridListModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {},
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
