@@ -110,10 +110,10 @@ export class BoardComponent implements OnInit {
 
   private openInfoDialog(data: DialogData): void {
     const dialogRef = this.dialog.open(InfoDialogComponent, {
-      width: '300px',
+      width: '325px',
       data,
       position: {
-        top: '0px',
+        top: '50px',
       },
     });
 

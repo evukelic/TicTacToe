@@ -21,5 +21,6 @@ body {
 }
 
 .amber {
-  background-color: #ffbf00;
+  background-color: rgb(68, 66, 66);
+  color: white;
 }
