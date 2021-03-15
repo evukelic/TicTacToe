@@ -7,11 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./start.component.css'],
 })
 export class StartComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor() {}
 
   public ngOnInit(): void {}
-
-  public onStartClick(): void {
-    this.router.navigateByUrl('/tic-tac-toe');
-  }
 }

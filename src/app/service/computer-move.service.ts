@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ComputerMoveService {
-  constructor() {}
+  public constructor() {}
 
-  public getComputerMove(board: string[][]): any {
+  public getComputerMove(board: string[][]): number[] {
     let bestVal = -1000;
     let bestMove = [-1, -1];
 
