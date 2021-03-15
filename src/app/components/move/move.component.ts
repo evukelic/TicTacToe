@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PLAYER_SRC, COMP_SRC } from './move.consts';
 
 @Component({
   selector: 'app-move',
@@ -6,7 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./move.component.css'],
 })
 export class MoveComponent implements OnInit {
-  @Input() public move: string;
+  @Input() public set setMove(move: string) {
+    if (move) {
+      this.moveSrc = move === 'X' ? PLAYER_SRC : COMP_SRC;
+    }
+  }
+
+  public moveSrc: string = '';
 
   public constructor() {}
 
