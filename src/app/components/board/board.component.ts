@@ -23,6 +23,7 @@ import {
 })
 export class BoardComponent implements OnInit {
   public board: string[][] = [];
+  public winTracker: boolean[][] = [];
 
   public constructor(
     public computerMoveService: ComputerMoveService,
@@ -53,7 +54,12 @@ export class BoardComponent implements OnInit {
   }
 
   private initEmptyBoard(): void {
-    this.board = [...Array(BOARD_DIMENSION)].map((_) => [...Array(BOARD_DIMENSION)].map((_) => ''));
+    this.board = this.mapTheArray('');
+    this.winTracker = this.mapTheArray(false);
+  }
+
+  private mapTheArray(value: string | boolean): any[][] {
+    return [...Array(BOARD_DIMENSION)].map((_) => [...Array(BOARD_DIMENSION)].map((_) => value));
   }
 
   private setComputerMove(): void {
@@ -122,6 +128,12 @@ export class BoardComponent implements OnInit {
       this.board[row][1] === player &&
       this.board[row][2] === player;
 
+    if (isWin) {
+      this.winTracker[row][0] = true;
+      this.winTracker[row][1] = true;
+      this.winTracker[row][2] = true;
+    }
+
     return isWin;
   }
 
@@ -131,6 +143,12 @@ export class BoardComponent implements OnInit {
       this.board[1][column] === player &&
       this.board[2][column] === player;
 
+    if (isWin) {
+      this.winTracker[0][column] = true;
+      this.winTracker[1][column] = true;
+      this.winTracker[2][column] = true;
+    }
+
     return isWin;
   }
 
@@ -138,12 +156,24 @@ export class BoardComponent implements OnInit {
     const isWin =
       this.board[0][0] === player && this.board[1][1] === player && this.board[2][2] === player;
 
+    if (isWin) {
+      this.winTracker[0][0] = true;
+      this.winTracker[1][1] = true;
+      this.winTracker[2][2] = true;
+    }
+
     return isWin;
   }
 
   private checkRightDiagonal(player: string): boolean {
     const isWin =
       this.board[2][0] === player && this.board[1][1] === player && this.board[0][2] === player;
+
+    if (isWin) {
+      this.winTracker[2][0] = true;
+      this.winTracker[1][1] = true;
+      this.winTracker[0][2] = true;
+    }
 
     return isWin;
   }

@@ -4,7 +4,7 @@
       <div *ngFor="let row of board; index as i">
         <div *ngFor="let row of board; index as j">
           <mat-grid-tile (click)="onPlayerMove(i, j)" class="move">
-            <app-move [setMove]="board[i][j]"></app-move>
+            <app-move [setMove]="board[i][j]" [setIsWin]="winTracker[i][j]"></app-move>
           </mat-grid-tile>
         </div>
       </div>
