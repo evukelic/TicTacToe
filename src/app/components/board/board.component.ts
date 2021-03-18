@@ -6,12 +6,15 @@ import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.comp
 import { DialogData } from 'src/app/shared/info-dialog/info-dialog.model';
 import {
   BOARD_DIMENSION,
+  COMPUTER_MOVE,
   DRAW_CONTENT,
   DRAW_TITLE,
+  EMPTY_MOVE,
   INVALID_MOVE,
   LOSE_CONTENT,
   LOSE_TITLE,
   OK,
+  PLAYER_MOVE,
   WIN_CONTENT,
   WIN_TITLE,
 } from './board.consts';
@@ -41,9 +44,9 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    this.board[row][column] = 'X';
+    this.board[row][column] = PLAYER_MOVE;
 
-    const isWin = this.isWin('X', row, column);
+    const isWin = this.isWin(PLAYER_MOVE, row, column);
     if (isWin) {
       const dialogData = this.getWinDialogData();
       this.openInfoDialog(dialogData);
@@ -54,7 +57,7 @@ export class BoardComponent implements OnInit {
   }
 
   private initEmptyBoard(): void {
-    this.board = this.mapTheArray('');
+    this.board = this.mapTheArray(EMPTY_MOVE);
     this.winTracker = this.mapTheArray(false);
   }
 
@@ -72,9 +75,9 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    this.board[row][column] = 'O';
+    this.board[row][column] = COMPUTER_MOVE;
 
-    const isWin = this.isWin('O', row, column);
+    const isWin = this.isWin(COMPUTER_MOVE, row, column);
     if (isWin) {
       const dialogData = this.getLoseDialogData();
       this.openInfoDialog(dialogData);
@@ -83,7 +86,7 @@ export class BoardComponent implements OnInit {
   }
 
   private isValidMove(row: number, column: number): boolean {
-    if (this.board[row][column] !== '') {
+    if (this.board[row][column] !== EMPTY_MOVE) {
       this.snackBar.open(INVALID_MOVE, OK, {
         duration: 2000,
       });

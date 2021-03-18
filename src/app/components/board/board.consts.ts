@@ -10,3 +10,7 @@ export const LOSE_CONTENT: string = 'Haha, you suck. Wanna try again?';
 
 export const INVALID_MOVE: string = 'Invalid move!';
 export const OK: string = 'OK';
+
+export const PLAYER_MOVE: string = 'X';
+export const COMPUTER_MOVE: string = 'O';
+export const EMPTY_MOVE: string = '';
